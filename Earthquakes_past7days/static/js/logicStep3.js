@@ -91,7 +91,7 @@ L.geoJson(data, {
     //  location of the earthquake after the marker has been created and styled.
     onEachFeature: function(feature, layer) {
     layer.bindPopup("Magnitude: " + feature.properties.mag + "<br>Location: " + feature.properties.place);
-	}
+	} 
   })
   .addTo(map);
 });
