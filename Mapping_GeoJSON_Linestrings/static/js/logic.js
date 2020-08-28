@@ -55,5 +55,3 @@ L.geoJson(data, {
 .addTo(map);
 });
 
-test 
-
