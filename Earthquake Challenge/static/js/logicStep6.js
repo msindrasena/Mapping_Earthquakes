@@ -15,26 +15,38 @@ attribution: 'Map data © <a href="https://www.openstreetmap.org/">OpenStreetMap
 	accessToken: API_KEY
 });
 
+// We create the tile view tile layer that will be a background for our map.
+let light = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/light-v10/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+	attribution: 'Map data © <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery (c) <a href="https://www.mapbox.com/">Mapbox</a>',
+		maxZoom: 18,
+		accessToken: API_KEY
+});
+
 // Create a base layer that holds both maps.
 let baseMaps = {
   "Streets": streets,
-  "Satellite Streets": satelliteStreets
+  "Satellite Streets": satelliteStreets,
+  "Light": light
 };
 
 // Create the earthquake layer for our map.
 let earthquakes = new L.layerGroup();
 
+// Create tectonics layer for our map.
+let tectonics = new L.layerGroup();
+
 // We define an object that contains the overlays.
 // This overlay will be visible all the time.
 let overlays = {
-	Earthquakes: earthquakes
+	Earthquakes: earthquakes,
+	Tectonic_Plates: tectonics
   };
 
 let map = L.map('mapid', {
-	center: [39.5, -98.5],
-	zoom: 3,
+	center: [31, -20],
+	zoom: 2,
 	layers: [streets]
-})
+});
 
 // Pass our map layers into our layers control and add the layers control to the map.
 L.control.layers(baseMaps, overlays).addTo(map);
@@ -137,3 +149,20 @@ L.geoJson(data, {
 
 	legend.addTo(map);
 
+	let myStyle = {
+		color: 'green',
+		weight: 2,
+		opacity: 0.6
+	}
+
+	d3.json("https://raw.githubusercontent.com/fraxen/tectonicplates/master/GeoJSON/PB2002_boundaries.json").then(function(data) {
+			console.log(data);
+		// Creating a GeoJSON layer with the retrieved data.	
+		L.geoJson(data, {
+				style: myStyle
+		}
+			).addTo(tectonics);
+
+		//Add tectonic layer to our map
+	tectonics.addTo(map);
+	});
