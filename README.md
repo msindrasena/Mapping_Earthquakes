@@ -8,6 +8,9 @@ This map shows tectonic activity in the last 7 days and includes a legend that s
 
 Using: 
 Javascript
+
 Leaflet Library
-Matbox ApI
+
+Matbox API
+
 ![](https://github.com/msindrasena/Mapping_Earthquakes/blob/master/Tectonic%20Map%20Image.PNG)
