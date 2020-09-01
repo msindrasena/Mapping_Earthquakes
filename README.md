@@ -10,3 +10,4 @@ Using:
 Javascript
 Leaflet Library
 Matbox ApI
+![](https://github.com/msindrasena/Mapping_Earthquakes/blob/master/Tectonic%20Map%20Image.PNG)
